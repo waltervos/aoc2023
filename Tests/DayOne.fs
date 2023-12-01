@@ -3,9 +3,6 @@ module Tests
 open NUnit.Framework
 open Solutions.DayOne
 
-[<SetUp>]
-let Setup () = ()
-
 [<Test>]
 let ``It concats the digits in a string of digits and characters`` () =
     let input = "qlcnz54dd757jfnlfgz"

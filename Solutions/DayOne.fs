@@ -10,23 +10,21 @@ module DayOne =
 
         writtenNumbers
         |> List.indexed
-        |> List.map (fun (i, s) ->
+        |> List.choose (fun (i, s) ->
             match input.LastIndexOf(s) with
-            | -1 -> -1, ""
-            | idx -> idx, (i + 1).ToString())
-        |> List.filter (fun item ->
-            match item with
-            | -1, "" -> false
-            | _ -> true)
+            | -1 -> None
+            | idx -> Some(idx, (i + 1).ToString()))
         |> Map.ofList
 
     let getCharDigits (input: string) =
         input
-            |> Seq.toList
-            |> List.indexed
-            |> List.filter (fun (i, c) -> c |> Char.IsDigit)
-            |> List.map (fun (i, c) -> i, c.ToString())
-            |> Map.ofList
+        |> Seq.toList
+        |> List.indexed
+        |> List.choose (fun (i, c) ->
+            match c |> Char.IsDigit with
+            | true -> Some(i, c.ToString())
+            | _ -> None)
+        |> Map.ofList
 
     let mergeDigitMaps charDigits wordDigits =
         Map.fold (fun s k v -> Map.add k v s) charDigits wordDigits
@@ -36,11 +34,9 @@ module DayOne =
     let getFirstAndLastDigit (input: string) =
         let wordDigits = getWordDigits input
 
-        let charDigits =
-            getCharDigits input
+        let charDigits = getCharDigits input
 
-        let allDigits =
-            mergeDigitMaps charDigits wordDigits
+        let allDigits = mergeDigitMaps charDigits wordDigits
 
         let firstDigit = allDigits[0]
         let lastDigit = allDigits |> List.last
@@ -48,6 +44,4 @@ module DayOne =
         firstDigit + lastDigit |> Int32.Parse
 
     let processStringList stringList =
-        stringList
-        |> List.map (fun (line) -> getFirstAndLastDigit line)
-        |> List.sum
+        stringList |> List.map (fun (line) -> getFirstAndLastDigit line) |> List.sum

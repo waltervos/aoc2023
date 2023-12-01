@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "SQ3hoODrRgiO/2XLB/Q3IdMFL3PmLlw3OXmS4l1Xdu9RCvBAPvdGxjBCNUIIhfaq/if/xaN+w1KGIi8iIWBkqg==",
+  "success": true,
+  "projectFilePath": "C:\\git\\aoc2023\\src\\Solutions\\Solutions.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Walter.Vos_nsp\\.nuget\\packages\\fsharp.core\\7.0.0\\fsharp.core.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
